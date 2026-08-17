@@ -1,0 +1,10 @@
+/* Layout handled inline in App.jsx */
+/* Additional component overrides */
+
+.page-fade-in {
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
