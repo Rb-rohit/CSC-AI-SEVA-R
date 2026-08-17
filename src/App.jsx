@@ -11,6 +11,9 @@ import OperatorTools from './pages/OperatorTools'
 import GovernmentSchemes from './pages/GovernmentSchemes'
 import Services from './pages/Services'
 import Certificates from './pages/Certificates'
+import Jobs from './pages/Jobs'
+import News from './pages/News'
+import ServiceVideos from './pages/ServiceVideos'
 import OperatorAccess from './pages/OperatorAccess'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import './App.css'
@@ -26,6 +29,9 @@ const PAGES = {
   billing: BillPayment, 
   services: Services, 
   schemes: GovernmentSchemes, 
+  jobs: Jobs,
+  news: News,
+  videos: ServiceVideos,
   agriculture: Agriculture, 
   education: EducationHealth, 
   operator: OperatorTools 
