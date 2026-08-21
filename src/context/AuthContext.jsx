@@ -12,6 +12,13 @@ export function AuthProvider({ children }) {
     operator,
     isAuthenticated: Boolean(operator),
     signIn: session => { localStorage.setItem('csc-session', JSON.stringify(session)); setOperator(session) },
+    updateOperator: updates => {
+      setOperator(current => {
+        const next = { ...current, ...updates }
+        localStorage.setItem('csc-session', JSON.stringify(next))
+        return next
+      })
+    },
     signOut: () => { localStorage.removeItem('csc-session'); setOperator(null) },
   }), [operator])
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

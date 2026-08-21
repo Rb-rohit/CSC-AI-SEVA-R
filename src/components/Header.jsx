@@ -16,7 +16,7 @@ const PAGE_TITLES = {
   operator:    '📊 Operator Tools',
 }
 
-export default function Header({ active, onToggle, lang, onLang, dark, onDark, operator, onLogout }) {
+export default function Header({ active, onToggle, lang, onLang, dark, onDark, operator, onLogout, onNav }) {
   return (
     <header style={{
       background:'#fff', borderBottom:'1px solid var(--border)',
@@ -53,10 +53,11 @@ export default function Header({ active, onToggle, lang, onLang, dark, onDark, o
         ))}
       </div>
 
-      <div style={{display:'flex',alignItems:'center',gap:8,padding:'6px 12px',background:'var(--bg)',borderRadius:20}}>
+      <button onClick={() => onNav?.('profile')} title="Open profile" style={{display:'flex',alignItems:'center',gap:8,padding:'6px 12px',background:'var(--bg)',border:'none',borderRadius:20}}>
         <div style={{width:28,height:28,borderRadius:'50%',background:'var(--navy)',display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:12,fontWeight:700}}>OP</div>
         <span style={{fontSize:12,fontWeight:600,color:'var(--text)',lineHeight:1.2}}>{operator?.name || 'Operator'}<small style={{display:'block',fontSize:9,color:'var(--muted)',fontWeight:500}}>{operator?.cscId || 'CSC Operator'}</small></span>
-      </div>
+      </button>
+      <button onClick={() => onNav?.('settings')} title="Settings" style={{background:'none',border:'none',color:'var(--muted)',fontSize:12,fontWeight:600,padding:4}}>Settings</button>
       <button onClick={onLogout} title="Sign out" style={{background:'none',border:'none',color:'var(--muted)',fontSize:16,padding:4}}>↪</button>
     </header>
   )

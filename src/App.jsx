@@ -15,6 +15,8 @@ import Jobs from './pages/Jobs'
 import News from './pages/News'
 import ServiceVideos from './pages/ServiceVideos'
 import OperatorAccess from './pages/OperatorAccess'
+import Profile from './pages/Profile'
+import Settings from './pages/Settings'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import './App.css'
 import Sidebar from './components/Sidebar'
@@ -34,7 +36,9 @@ const PAGES = {
   videos: ServiceVideos,
   agriculture: Agriculture, 
   education: EducationHealth, 
-  operator: OperatorTools 
+  operator: OperatorTools,
+  profile: Profile,
+  settings: Settings
 }
 
 function RequireOperator() {
@@ -88,6 +92,7 @@ function WorkspaceLayout() {
           onDark={setDark} 
           operator={operator} 
           onLogout={logout} 
+          onNav={page => navigate(`/app/${page}`)}
         />
         <main style={{ flex: 1, padding: 24, overflowY: 'auto' }}>
           <Outlet context={{ operator, navigate }} />
