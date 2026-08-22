@@ -82,7 +82,7 @@ function WorkspaceLayout() {
         onNav={page => navigate(`/app/${page}`)} 
         open={open} 
       />
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', marginLeft: open ? 240 : 66, transition: 'margin-left .25s', minWidth: 0 }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', marginLeft: open ? 260 : 70, transition: 'margin-left .25s', minWidth: 0 }}>
         <Header 
           active={locationPage()} 
           onToggle={() => setOpen(value => !value)} 

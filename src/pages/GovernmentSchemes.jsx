@@ -59,7 +59,7 @@ export default function GovernmentSchemes({ onNav }) {
       <div className="schemes-toolbar card">
         <div className="scheme-search">
           <span>🔎</span>
-          <input value={query} onChange={event => setQuery(event.target.value)} placeholder="Search schemes, benefits or services" aria-label="Search government schemes" />
+          <input value={query} onChange={event => setQuery(event.target.value)} placeholder="Search schemes, benefits or services" aria-label="Search government schemes" className='w-full outline-none focus:outline-none focus:ring-0 focus:border-transparent' />
         </div>
         <span className="badge badge-navy">{visibleSchemes.length} schemes found</span>
       </div>

@@ -85,7 +85,7 @@ export default function ServiceVideos() {
       <div className="listing-toolbar card">
         <div className="scheme-search">
           <span>🔎</span>
-          <input value={query} onChange={event => setQuery(event.target.value)} placeholder="Search service videos" />
+          <input value={query} onChange={event => setQuery(event.target.value)} placeholder="Search service videos" className='w-full outline-none focus:outline-none focus:ring-0 focus:border-transparent' />
         </div>
         <select value={sort} onChange={event => setSort(event.target.value)} aria-label="Sort videos">
           <option value="newest">Newest first</option>

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ArrowDownAZ, ArrowUpAZ, Search, SlidersHorizontal } from 'lucide-react'
 
 const TOOLS = [
   { id:'aadhaar-cropper',   icon:'🪪', title:'Aadhaar Card Cropper',     type:'CROPPER', category:'ID Card' },
@@ -28,6 +29,23 @@ const TYPE_COLORS = {
 
 export default function ImportantTools() {
   const [selectedTool, setSelectedTool] = useState(null)
+  const [category, setCategory] = useState('all')
+  const [query, setQuery] = useState('')
+  const [sort, setSort] = useState('name-asc')
+
+  const categories = [
+    ['all', 'All Tools'], ['ID Card', 'ID Card Croppers'], ['PDF Tools', 'PDF Tools'],
+    ['Image Tools', 'Image Tools'], ['Document', 'Documents'],
+  ]
+  const visibleTools = TOOLS
+    .filter(tool => category === 'all' || tool.category === category)
+    .filter(tool => `${tool.title} ${tool.category} ${tool.type}`.toLowerCase().includes(query.trim().toLowerCase()))
+    .sort((a, b) => {
+      if (sort === 'name-desc') return b.title.localeCompare(a.title)
+      if (sort === 'category') return a.category.localeCompare(b.category) || a.title.localeCompare(b.title)
+      if (sort === 'type') return a.type.localeCompare(b.type) || a.title.localeCompare(b.title)
+      return a.title.localeCompare(b.title)
+    })
 
   if (selectedTool) {
     return (
@@ -57,17 +75,22 @@ export default function ImportantTools() {
       </div>
 
       {/* Tool Categories */}
-      <div className="tabs" style={{marginBottom:20}}>
-        <button className="tab active">All Tools</button>
-        <button className="tab">ID Card Croppers</button>
-        <button className="tab">PDF Tools</button>
-        <button className="tab">Image Tools</button>
-        <button className="tab">Documents</button>
+      <div className="tabs important-tool-tabs" style={{marginBottom:14}}>
+        {categories.map(([id, label]) => <button key={id} className={`tab ${category === id ? 'active' : ''}`} onClick={() => setCategory(id)}>{label}</button>)}
       </div>
+
+      <div className="important-tools-toolbar card">
+        <div className="important-tools-search">
+          <Search size={17} aria-hidden="true" />
+          <input className='w-full outline-none focus:outline-none focus:ring-0 focus:border-transparent' value={query} onChange={event => setQuery(event.target.value)} placeholder="Search tools by name, category, or type" aria-label="Search important tools" />
+        </div>
+        <label className="important-tools-sort" htmlFor="tool-sort"><SlidersHorizontal size={16} aria-hidden="true" /><span>Sort</span><select id="tool-sort" value={sort} onChange={event => setSort(event.target.value)}><option value="name-asc">Name: A-Z</option><option value="name-desc">Name: Z-A</option><option value="category">Category</option><option value="type">Tool type</option></select>{sort === 'name-desc' ? <ArrowUpAZ size={16} aria-hidden="true" /> : <ArrowDownAZ size={16} aria-hidden="true" />}</label>
+      </div>
+      <div className="important-tools-result-count">{visibleTools.length} {visibleTools.length === 1 ? 'tool' : 'tools'} found</div>
 
       {/* Tools Grid */}
       <div className="grid-4">
-        {TOOLS.map(tool => (
+        {visibleTools.map(tool => (
           <div key={tool.id} className="card"
             onClick={() => setSelectedTool(tool)}
             style={{cursor:'pointer',borderTop:`3px solid ${TYPE_COLORS[tool.type]}`,transition:'all .2s',position:'relative'}}
@@ -81,6 +104,7 @@ export default function ImportantTools() {
           </div>
         ))}
       </div>
+      {!visibleTools.length && <div className="card important-tools-empty"><Search size={24} /><strong>No tools found</strong><span>Try another search term or category.</span><button type="button" className="btn btn-outline btn-sm" onClick={() => { setCategory('all'); setQuery('') }}>Clear filters</button></div>}
     </div>
   )
 }

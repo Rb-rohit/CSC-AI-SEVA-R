@@ -62,6 +62,7 @@ export default function Certificates({ onNav }) {
             onChange={event => setQuery(event.target.value)} 
             placeholder="Search certificates" 
             aria-label="Search certificates" 
+            className='w-full outline-none focus:outline-none focus:ring-0 focus:border-transparent'
           />
         </div>
         <span className="badge badge-navy">

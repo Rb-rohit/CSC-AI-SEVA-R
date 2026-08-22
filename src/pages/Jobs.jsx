@@ -78,6 +78,7 @@ export default function Jobs() {
             value={query} 
             onChange={event => setQuery(event.target.value)} 
             placeholder="Search job title, organization or location" 
+            className='w-full outline-none focus:outline-none focus:ring-0 focus:border-transparent'
           />
         </div>
         <select value={sort} onChange={event => setSort(event.target.value)} aria-label="Sort jobs">

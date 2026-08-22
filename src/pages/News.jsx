@@ -67,7 +67,7 @@ export default function News() {
       <div className="listing-toolbar card">
         <div className="scheme-search">
           <span>🔎</span>
-          <input value={query} onChange={event => setQuery(event.target.value)} placeholder="Search news and updates" />
+          <input value={query} onChange={event => setQuery(event.target.value)} placeholder="Search news and updates" className='w-full outline-none focus:outline-none focus:ring-0 focus:border-transparent' />
         </div>
         <select value={sort} onChange={event => setSort(event.target.value)} aria-label="Sort news">
           <option value="newest">Newest first</option>

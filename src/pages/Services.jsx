@@ -91,7 +91,10 @@ export default function Services({ onNav }) {
       </div>
 
       <div className="schemes-toolbar card">
-        <div className="scheme-search"><span>🔎</span><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Search CSC services" aria-label="Search CSC services" /></div>
+        <div className="scheme-search">
+          <span>🔎</span>
+          <input value={query} onChange={event => setQuery(event.target.value)} placeholder="Search CSC services" aria-label="Search CSC services" className='w-full outline-none focus:outline-none focus:ring-0 focus:border-transparent' />
+        </div>
         <span className="badge badge-navy">{matches.length} services found</span>
       </div>
 
