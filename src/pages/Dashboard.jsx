@@ -1,57 +1,57 @@
 import { useState, useEffect } from 'react'
-import { Camera, MessageCircle, ThumbsUp } from 'lucide-react'
 import { statsAPI } from '../services/api'
+import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa'
 
-const MODULES = [
-  { 
-    id:'documents',   
-    icon:'📄', 
-    title:'Documents & Forms',  
-    desc:'OCR scan, auto-fill Aadhaar/PAN, generate certificates',
-    badge:'Live', 
-    color:'#EAF0FB' 
-  },
-  { 
-    id:'chatbot',     
-    icon:'💬', 
-    title:'Customer Service',   
-    desc:'Hindi/Marathi AI chatbot + application tracker',          
-    badge:'Live', 
-    color:'#FDF3EC' 
-  },
-  { 
-    id:'billing',     
-    icon:'⚡', 
-    title:'Bill Payments',      
-    desc:'Electricity, water, property tax, LPG gas',             
-    badge:'Live', 
-    color:'#EBF7EA' 
-  },
-  { 
-    id:'agriculture', 
-    icon:'🌾', 
-    title:'Agriculture',        
-    desc:'PM-Kisan, Fasal Bima, soil health, E-NAM market',        
-    badge:'New',  
-    color:'#F0FAF0' 
-  },
-  { 
-    id:'education',   
-    icon:'🎓', 
-    title:'Education & Health', 
-    desc:'RTE, scholarships, Ayushman Bharat, CoWIN',              
-    badge:'New',  
-    color:'#F3F0FB' 
-  },
-  { 
-    id:'operator',    
-    icon:'📊',
-    title:'Operator Tools',     
-    desc:'Daily reports, commissions, WhatsApp alerts',            
-    badge:'Beta', 
-    color:'#FBF5E0' 
-  },
-]
+// const MODULES = [
+//   { 
+//     id:'documents',   
+//     icon:'📄', 
+//     title:'Documents & Forms',  
+//     desc:'OCR scan, auto-fill Aadhaar/PAN, generate certificates',
+//     badge:'Live', 
+//     color:'#EAF0FB' 
+//   },
+//   { 
+//     id:'chatbot',     
+//     icon:'💬', 
+//     title:'Customer Service',   
+//     desc:'Hindi/Marathi AI chatbot + application tracker',          
+//     badge:'Live', 
+//     color:'#FDF3EC' 
+//   },
+//   { 
+//     id:'billing',     
+//     icon:'⚡', 
+//     title:'Bill Payments',      
+//     desc:'Electricity, water, property tax, LPG gas',             
+//     badge:'Live', 
+//     color:'#EBF7EA' 
+//   },
+//   { 
+//     id:'agriculture', 
+//     icon:'🌾', 
+//     title:'Agriculture',        
+//     desc:'PM-Kisan, Fasal Bima, soil health, E-NAM market',        
+//     badge:'New',  
+//     color:'#F0FAF0' 
+//   },
+//   { 
+//     id:'education',   
+//     icon:'🎓', 
+//     title:'Education & Health', 
+//     desc:'RTE, scholarships, Ayushman Bharat, CoWIN',              
+//     badge:'New',  
+//     color:'#F3F0FB' 
+//   },
+//   { 
+//     id:'operator',    
+//     icon:'📊',
+//     title:'Operator Tools',     
+//     desc:'Daily reports, commissions, WhatsApp alerts',            
+//     badge:'Beta', 
+//     color:'#FBF5E0' 
+//   },
+// ]
 
 // const IMPORTANT_TOOLS = [
 //   { id:'aadhaar',     icon:'🪪', title:'Aadhaar Services',     desc:'New enrollment, update, correction, print',              category:'Identity' },
@@ -89,7 +89,7 @@ const MODULES = [
 //   { id:'death',       icon:'🪦', title:'Death Certificate',     desc:'Death registration, certificate',                         category:'Documents' },
 // ]
 
-const BADGE_COLORS = { Live:'badge-green', New:'badge-orange', Beta:'badge-navy' }
+// const BADGE_COLORS = { Live:'badge-green', New:'badge-orange', Beta:'badge-navy' }
 const REVENUE = [42, 58, 46, 76, 64, 83, 91]
 const REVENUE_DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 const QR_TILES = [
@@ -102,7 +102,7 @@ const QR_TILES = [
   '1111111011101010111'
 ]
 
-export default function Dashboard({ onNav }) {
+export default function Dashboard() {
   const [stats, setStats] = useState(null)
   // const [toolsTab, setToolsTab] = useState('all')
 
@@ -221,20 +221,20 @@ export default function Dashboard({ onNav }) {
           <p className="insight-sub">Share service updates with your community.</p>
           <div className="social-links">
             <a href="https://wa.me/" target="_blank" rel="noreferrer">
-              <i className="social-icon whatsapp">
-                <MessageCircle size={16} strokeWidth={2.5} />
+              <i className="social-icon whatsapp flex items-center justify-center">
+                <FaWhatsapp size={18} strokeWidth={2.5} />
               </i>
               <span className="social-copy">WhatsApp<small>Open</small></span>
             </a>
             <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">
-              <i className="social-icon facebook">
-                <ThumbsUp size={15} strokeWidth={2.5} />
+              <i className="social-icon facebook flex items-center justify-center">
+                <FaFacebook size={18} strokeWidth={2.5} />
               </i>
               <span className="social-copy">Facebook<small>Open</small></span>
             </a>
             <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">
-              <i className="social-icon instagram">
-                <Camera size={15} strokeWidth={2.5} />
+              <i className="social-icon instagram flex items-center justify-center">
+                <FaInstagram size={18} strokeWidth={2.5} />
               </i>
               <span className="social-copy">Instagram<small>Open</small></span>
             </a>
@@ -254,7 +254,7 @@ export default function Dashboard({ onNav }) {
       </div>
 
       {/* Modules */}
-      <div className="section-title">🚀 AI Tools & Services</div>
+      {/* <div className="section-title">🚀 AI Tools & Services</div>
       <div className="grid-3">
         {MODULES.map(m => (
           <div key={m.id} className="card dashboard-hover-card" onClick={() => onNav && onNav(m.id)}
@@ -268,7 +268,7 @@ export default function Dashboard({ onNav }) {
             <div style={{fontSize:12,color:'var(--muted)',lineHeight:1.6}}>{m.desc}</div>
           </div>
         ))}
-      </div>
+      </div> */}
 
       {/* Important Tools */}
       {/* <div className="section-title" style={{marginTop:32}}>🛠️ Important Tools</div>

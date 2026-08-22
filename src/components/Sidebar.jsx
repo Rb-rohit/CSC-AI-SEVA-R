@@ -1,20 +1,118 @@
+import { BadgeCheck, BriefcaseBusiness, ChartNoAxesCombined, FileText, GraduationCap, Landmark, LayoutDashboard, LayoutGrid, MessageCircle, Newspaper, Video, Wheat, Wrench, Zap } from "lucide-react"
 
 
 const NAV = [
-  { id:'dashboard',   icon:'🏠', label:'Dashboard' },
-  { id:'important',   icon:'🛠️', label:'Important Tools',   badge:'New' },
-  { id:'documents',   icon:'📄', label:'Documents & Forms',  badge:'Live' },
-  { id:'certificates',icon:'📜', label:'Certificates',        badge:'New' },
-  { id:'chatbot',     icon:'💬', label:'Customer Service',   badge:'Live' },
-  { id:'billing',     icon:'⚡', label:'Bill Payments',      badge:'Live' },
-  { id:'services',    icon:'🧰', label:'CSC Services',        badge:'New' },
-  { id:'jobs',        icon:'💼', label:'Jobs',                badge:'New' },
-  { id:'news',        icon:'📰', label:'News & Updates',       badge:'Live' },
-  { id:'videos',      icon:'🎥', label:'Service Videos',       badge:'New' },
-  { id:'schemes',     icon:'🏛️', label:'Government Schemes', badge:'New' },
-  { id:'agriculture', icon:'🌾', label:'Agriculture',        badge:'New' },
-  { id:'education',   icon:'🎓', label:'Education & Health', badge:'New' },
-  { id:'operator',    icon:'📊', label:'Operator Tools',     badge:'Beta' },
+  {
+    id: 'dashboard',
+    icon: <LayoutDashboard size={18} />,
+    label: 'Dashboard',
+    color: 'text-blue-600',
+    bg: 'bg-blue-100'
+  },
+  {
+    id: 'important',
+    icon: <Wrench size={18} />,
+    label: 'Important Tools',
+    badge: 'New',
+    color: 'text-orange-600',
+    bg: 'bg-orange-100'
+  },
+  {
+    id: 'documents',
+    icon: <FileText size={18} />,
+    label: 'Documents & Forms',
+    badge: 'Live',
+    color: 'text-green-600',
+    bg: 'bg-green-100'
+  },
+  {
+    id: 'certificates',
+    icon: <BadgeCheck size={18} />,
+    label: 'Certificates',
+    badge: 'New',
+    color: 'text-purple-600',
+    bg: 'bg-purple-100'
+  },
+  {
+    id: 'chatbot',
+    icon: <MessageCircle size={18} />,
+    label: 'Customer Service',
+    badge: 'Live',
+    color: 'text-cyan-600',
+    bg: 'bg-cyan-100'
+  },
+  {
+    id: 'billing',
+    icon: <Zap size={18} />,
+    label: 'Bill Payments',
+    badge: 'Live',
+    color: 'text-Amber-600',
+    bg: 'bg-Amber-100'
+  },
+  {
+    id: 'services',
+    icon: <LayoutGrid size={18} />,
+    label: 'CSC Services',
+    badge: 'New',
+    color: 'text-indigo-600',
+    bg: 'bg-indigo-100'
+  },
+  {
+    id: 'jobs',
+    icon: <BriefcaseBusiness size={18} />,
+    label: 'Jobs',
+    badge: 'New',
+    color: 'text-sky-600',
+    bg: 'bg-sky-100'
+  },
+  {
+    id: 'news',
+    icon: <Newspaper size={18} />,
+    label: 'News & Updates',
+    badge: 'Live',
+    color: 'text-red-600',
+    bg: 'bg-red-100'
+  },
+  {
+    id: 'videos',
+    icon: <Video size={18} />,
+    label: 'Service Videos',
+    badge: 'New',
+    color: 'text-pink-600',
+    bg: 'bg-pink-100'
+  },
+  {
+    id: 'schemes',
+    icon: <Landmark size={18} />,
+    label: 'Government Schemes',
+    badge: 'New',
+    color: 'text-indigo-600',
+    bg: 'bg-indigo-100'
+  },
+  {
+    id: 'agriculture',
+    icon: <Wheat size={18} />,
+    label: 'Agriculture',
+    badge: 'New',
+    color: 'text-green-600',
+    bg: 'bg-green-100'
+  },
+  {
+    id: 'education',
+    icon: <GraduationCap size={18} />,
+    label: 'Education & Health',
+    badge: 'New',
+    color: 'text-voilet-600',
+    bg: 'bg-voilet-100'
+  },
+  {
+    id: 'operator',
+    icon: <ChartNoAxesCombined size={18} />,
+    label: 'Operator Tools',
+    badge: 'Beta',
+    color: 'text-slate-600',
+    bg: 'bg-slate-100'
+  }
 ]
 
 const BADGE_COLOR = { Live:'badge-green', New:'badge-orange', Beta:'badge-navy' }
@@ -23,7 +121,7 @@ export default function Sidebar({ active, onNav, open }) {
   return (
     <div style={{
       position:'fixed', top:0, left:0, height:'100vh', zIndex:100,
-      width: open ? 240 : 66,
+      width: open ? 260 : 70,
       background:'linear-gradient(180deg,#0A2156 0%,#0d2d70 100%)',
       display:'flex', flexDirection:'column',
       transition:'width .25s', overflow:'hidden',
@@ -44,7 +142,9 @@ export default function Sidebar({ active, onNav, open }) {
       <nav style={{flex:1,padding:'10px 8px',overflowY:'auto'}}>
         {open && <div style={{fontSize:10,fontWeight:700,color:'rgba(255,255,255,0.3)',textTransform:'uppercase',letterSpacing:'.07em',padding:'8px 8px 4px'}}>Main Menu</div>}
         {NAV.map(n => (
-          <button key={n.id} onClick={() => onNav(n.id)}
+          <button 
+            key={n.id} 
+            onClick={() => onNav(n.id)}
             style={{
               display:'flex', alignItems:'center', gap:10,
               width:'100%', padding:'10px 10px', borderRadius:9, marginBottom:2,
@@ -56,7 +156,7 @@ export default function Sidebar({ active, onNav, open }) {
             onMouseEnter={e=>{ if(active!==n.id) e.currentTarget.style.background='rgba(255,255,255,0.1)' }}
             onMouseLeave={e=>{ if(active!==n.id) e.currentTarget.style.background='transparent' }}
           >
-            <span style={{fontSize:16,flexShrink:0,width:22,textAlign:'center'}}>{n.icon}</span>
+            <span className={`flex shrink-0 items-center justify-center w-6 h-6 rounded ${n.color} ${n.bg}`} >{n.icon}</span>
             {open && (
               <>
                 <span style={{flex:1}}>{n.label}</span>

@@ -1,3 +1,4 @@
+@import "tailwindcss";
 :root {
   --saffron:#E8650A; --saffron-light:#FDF3EC; --saffron-mid:#F28A45;
   --navy:#0A2156; --navy-mid:#1A3A8C; --navy-light:#EAF0FB;
@@ -1491,7 +1492,7 @@ input[type=date]{
 .overview-stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:1px;
+  gap:8px;
   border:1px solid var(--border);
   border-radius:var(--radius);
   overflow:hidden;
@@ -1503,7 +1504,8 @@ input[type=date]{
   flex-direction:column;
   justify-content:center;
   padding:16px;
-  background:var(--surface)
+  background:var(--surface);
+  border-radius:var(--radius)
 }
 .overview-stat span,.overview-stat small{
   font-size:11px;
@@ -1626,7 +1628,7 @@ input[type=date]{
 .social-links a{
   display:flex;
   flex-direction:column;
-  gap:1px;padding:9px;
+  padding:9px;
   border-radius:var(--radius-sm);
   text-decoration:none;
   background:var(--bg);
@@ -1635,7 +1637,7 @@ input[type=date]{
   font-weight:700
 }
 .social-links a:hover{background:var(--navy-light)}
-.social-links a span{font-size:10px;color:var(--muted);font-weight:500}
+.social-links a span{font-size:15px;color:var(--muted);font-weight:500}
 .qr-card{
   display:flex;
   align-items:center;
