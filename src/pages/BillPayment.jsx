@@ -63,7 +63,7 @@ export default function BillPayment() {
             <label>Consumer / Account Number</label>
             <input type="text" placeholder={`Enter ${selected} consumer number`} value={consumerNo} onChange={e=>setConsumerNo(e.target.value)} onKeyDown={e=>e.key==='Enter'&&fetchBill()} />
           </div>
-          <button className="btn btn-saffron" onClick={fetchBill} disabled={loading} style={{width:'100%',justifyContent:'center'}}>
+          <button className="inline-flex items-center gap-[6px] px-[18px] py-[9px] rounded-[var(--radius-sm)] text-[13px] font-semibold border-0 cursor-pointer transition-all duration-150 whitespace-nowrap bg-[var(--saffron)] text-white hover:bg-[#c85608]" onClick={fetchBill} disabled={loading} style={{width:'100%',justifyContent:'center'}}>
             {loading ? '⏳ Fetching...' : '🔍 Fetch Bill Details'}
           </button>
 
@@ -79,7 +79,7 @@ export default function BillPayment() {
                     <span style={{fontSize:13,fontWeight:600,color: k==='amount' ? 'var(--saffron)' : 'var(--text)'}}>{k==='amount' ? '₹'+v : v}</span>
                   </div>
                 ))}
-                <button className="btn btn-green" onClick={payBill} disabled={loading} style={{width:'100%',justifyContent:'center',marginTop:14}}>
+                <button className="inline-flex items-center gap-[6px] px-[18px] py-[9px] rounded-[var(--radius-sm)] text-[13px] font-semibold border-0 cursor-pointer transition-all duration-150 whitespace-nowrap btn-green" onClick={payBill} disabled={loading} style={{width:'100%',justifyContent:'center',marginTop:14}}>
                   {loading ? '⏳ Processing...' : `💳 Pay ₹${bill.amount}`}
                 </button>
               </div>

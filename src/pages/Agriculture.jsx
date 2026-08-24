@@ -62,7 +62,7 @@ export default function Agriculture() {
                   <div><strong>Next Installment:</strong> {result.next_installment}</div>
                   <div><strong>Annual Benefit:</strong> ₹{result.annual_benefit}</div>
                 </div>
-                <button className="btn btn-primary" onClick={()=>{ setResult(null); setForm({ name:'',aadhaar:'',mobile:'',bank_account:'',ifsc:'',land_acres:'',village:'' }) }}>
+                <button className="inline-flex items-center gap-[6px] px-[12px] py-[6px] mt-[12px] rounded-[var(--radius-sm)] text-[12px] font-semibold border-0 text-[13px] cursor-pointer transition-all duration-150 whitespace-nowrap bg-[var(--navy)] text-white hover:bg-[var(--navy-mid)]" onClick={()=>{ setResult(null); setForm({ name:'',aadhaar:'',mobile:'',bank_account:'',ifsc:'',land_acres:'',village:'' }) }}>
                   Register Another Farmer
                 </button>
               </div>
@@ -80,7 +80,7 @@ export default function Agriculture() {
                     <input type="text" placeholder="Village name" value={form.village} onChange={e=>setForm(f=>({...f,village:e.target.value}))} />
                   </div>
                 </div>
-                <button className="btn btn-green" onClick={handleRegister} disabled={loading} style={{width:'100%',justifyContent:'center'}}>
+                <button className="inline-flex items-center gap-[6px] px-[18px] py-[9px] rounded-[var(--radius-sm)] text-[13px] font-semibold border-0 cursor-pointer transition-all duration-150 whitespace-nowrap bg-[var(--green)] text-white hover:bg-[#0f6906]" onClick={handleRegister} disabled={loading} style={{width:'100%',justifyContent:'center'}}>
                   {loading ? '⏳ Registering...' : '✅ Submit PM-Kisan Registration'}
                 </button>
               </>
@@ -115,7 +115,25 @@ export default function Agriculture() {
                 <div className="scheme-name">🌾 {s.name}</div>
                 <div className="scheme-benefit">{s.benefit}</div>
                 <div className="scheme-docs" style={{marginTop:6,fontSize:12,color:'var(--muted)'}}>📄 {s.docs}</div>
-                <button className="btn btn-outline btn-sm" style={{marginTop:12}}>Apply Now →</button>
+                <button
+                  className="
+                    inline-flex items-center
+                    gap-[6px]
+                    px-[12px] py-[6px]
+                    mt-[12px]
+                    rounded-[var(--radius-sm)]
+                    text-[12px]
+                    font-semibold
+                    border-[1.5px] border-[var(--border)]
+                  bg-white text-[var(--text)]
+                    cursor-pointer
+                    transition-all duration-150
+                    whitespace-nowrap
+                    hover:bg-[var(--bg)]
+                  "
+                >
+                  Apply Now →
+                </button>
               </div>
             ))}
           </div>

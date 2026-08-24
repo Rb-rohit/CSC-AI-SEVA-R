@@ -132,7 +132,7 @@ export default function Certificates({ onNav }) {
               {selected.documents}
             </div>
             <button 
-              className="btn btn-primary" 
+              className="inline-flex items-center gap-[6px] px-[18px] py-[9px] rounded-[var(--radius-sm)] text-[13px] font-semibold border-0 cursor-pointer transition-all duration-150 whitespace-nowrap bg-[var(--navy)] text-white hover:bg-[var(--navy-mid)]" 
               onClick={() => onNav('documents')}
             >
               Start application →
