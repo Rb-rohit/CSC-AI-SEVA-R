@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { agriAPI } from '../services/api'
+import { CircleCheck, ClipboardList, Coins, FileText, Smartphone, Wheat } from 'lucide-react'
 
 export default function Agriculture() {
   const [tab, setTab] = useState('kisan')
@@ -44,18 +45,18 @@ export default function Agriculture() {
       </div>
 
       <div className="tabs">
-        <button className={`tab ${tab==='kisan'?'active':''}`} onClick={()=>setTab('kisan')}>🌾 PM-Kisan Registration</button>
-        <button className={`tab ${tab==='schemes'?'active':''}`} onClick={()=>setTab('schemes')}>📋 All Schemes</button>
+        <button className={`tab ${tab==='kisan'?'active':''} flex items-center gap-[6px] justify-center`} onClick={()=>setTab('kisan')}><Wheat color='green' size={20} /> PM-Kisan Registration</button>
+        <button className={`tab ${tab==='schemes'?'active':''} flex items-center gap-[6px] justify-center`} onClick={()=>setTab('schemes')}><ClipboardList color='orange' size={20} /> All Schemes</button>
       </div>
 
       {tab === 'kisan' && (
         <div className="grid-2" style={{alignItems:'start'}}>
           <div className="card">
-            <div className="section-title">🌾 PM-Kisan Registration</div>
+            <div className="section-title"><Wheat color='green' size={20} /> PM-Kisan Registration</div>
             {result ? (
               <div>
                 <div className="success-box" style={{marginBottom:16}}>
-                  <div style={{fontWeight:700,fontSize:15,marginBottom:8}}>✅ Registration Successful!</div>
+                  <div className='flex items-center gap-2' style={{fontWeight:700,fontSize:15,marginBottom:8}}><CircleCheck size={20} color="#16A34A" /> Registration Successful!</div>
                   <div><strong>Registration No:</strong> {result.reg_no}</div>
                   <div><strong>Farmer:</strong> {result.farmer}</div>
                   <div><strong>Status:</strong> {result.status}</div>
@@ -80,15 +81,28 @@ export default function Agriculture() {
                     <input type="text" placeholder="Village name" value={form.village} onChange={e=>setForm(f=>({...f,village:e.target.value}))} />
                   </div>
                 </div>
-                <button className="inline-flex items-center gap-[6px] px-[18px] py-[9px] rounded-[var(--radius-sm)] text-[13px] font-semibold border-0 cursor-pointer transition-all duration-150 whitespace-nowrap bg-[var(--green)] text-white hover:bg-[#0f6906]" onClick={handleRegister} disabled={loading} style={{width:'100%',justifyContent:'center'}}>
-                  {loading ? '⏳ Registering...' : '✅ Submit PM-Kisan Registration'}
+
+                <button
+                  className="inline-flex items-center gap-[6px] px-[18px] py-[9px] rounded-[var(--radius-sm)] text-[13px] font-semibold border-0 cursor-pointer transition-all duration-150 whitespace-nowrap bg-[var(--green)] text-white hover:bg-[#0f6906] disabled:opacity-60"
+                  onClick={handleRegister}
+                  disabled={loading}
+                  style={{ width: "100%", justifyContent: "center" }}
+                >
+                  {loading ? (
+                    "⏳ Registering..."
+                  ) : (
+                    <>
+                      <CircleCheck size={18} />
+                      Submit PM-Kisan Registration
+                    </>
+                  )}
                 </button>
               </>
             )}
           </div>
 
           <div className="card">
-            <div className="section-title">📋 Required Documents</div>
+            <div className="section-title"><ClipboardList color='orange' size={20} /> Required Documents</div>
             {['Aadhaar Card (mandatory)','Land ownership records (7/12 Utara / Khasra-Khatauni)','Bank passbook (account in farmer\'s name)','Mobile number linked to Aadhaar'].map((d,i) => (
               <div key={i} style={{display:'flex',gap:10,padding:'10px 0',borderBottom:'1px solid var(--border)'}}>
                 <span style={{color:'var(--green)',fontWeight:700,flexShrink:0}}>✓</span>
@@ -96,11 +110,11 @@ export default function Agriculture() {
               </div>
             ))}
             <div style={{marginTop:14,padding:12,background:'var(--gold-light)',borderRadius:'var(--radius-sm)'}}>
-              <div style={{fontWeight:700,fontSize:12,color:'var(--gold)'}}>💰 CSC Commission</div>
+              <div className='flex gap-0.5 items-center' style={{fontWeight:700,fontSize:12,color:'var(--gold)'}}><Coins size={20} color="#D97706" /> CSC Commission</div>
               <div style={{fontSize:12,color:'#7a5c08',marginTop:3}}>₹150 per successful PM-Kisan registration</div>
             </div>
             <div style={{marginTop:10,padding:12,background:'var(--saffron-light)',borderRadius:'var(--radius-sm)'}}>
-              <div style={{fontWeight:700,fontSize:12,color:'var(--saffron)'}}>📲 Helpline</div>
+              <div className='flex gap-0.5 items-center' style={{fontWeight:700,fontSize:12,color:'var(--saffron)'}}><Smartphone size={12} color="#2563EB" />  Helpline</div>
               <div style={{fontSize:12,color:'#a04208',marginTop:3}}>PM-Kisan Helpdesk: 155261 / 1800-115-526</div>
             </div>
           </div>
@@ -112,9 +126,9 @@ export default function Agriculture() {
           <div className="grid-3">
             {schemes.map(s => (
               <div key={s.id} className="scheme-card">
-                <div className="scheme-name">🌾 {s.name}</div>
+                <div className="scheme-name"><Wheat color='green' size={20} /> {s.name}</div>
                 <div className="scheme-benefit">{s.benefit}</div>
-                <div className="scheme-docs" style={{marginTop:6,fontSize:12,color:'var(--muted)'}}>📄 {s.docs}</div>
+                <div className="scheme-docs" style={{marginTop:6,fontSize:12,color:'var(--muted)'}}><FileText size={12} color="#2563EB" /> {s.docs}</div>
                 <button
                   className="
                     inline-flex items-center

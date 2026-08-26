@@ -1,5 +1,12 @@
 import { useState } from 'react'
 import { docsAPI } from '../services/api'
+import { Camera, CheckCircle, FileText, Hourglass, LoaderCircle, PenLine, Printer, Save, ScrollText, Smartphone, Sparkles } from 'lucide-react';
+
+const TABS = [
+  { id: "ocr", label: "OCR Scanner", icon: Camera, color: "#2563EB" },
+  { id: "fill", label: "Auto Fill", icon: PenLine,  color: "#16A34A" },
+  { id: "cert", label: "Certificates", icon: ScrollText, color: "#EA580C" },
+];
 
 export default function Documents() {
   const [tab, setTab] = useState('ocr')
@@ -53,30 +60,37 @@ export default function Documents() {
       </div>
 
       <div className="tabs">
-        {[['ocr','📷 OCR Scanner'],['fill','✏️ Auto Fill'],['cert','📜 Certificates']].map(([id,lbl]) => (
-          <button key={id} className={`tab ${tab===id?'active':''}`} onClick={()=>setTab(id)}>{lbl}</button>
+        {TABS.map(({ id, label, icon: Icon, color }) => (
+          <button
+            key={id}
+            className={`tab ${tab === id ? "active" : ""} flex items-center gap-[6px] justify-center`}
+            onClick={() => setTab(id)}
+          >
+            <Icon size={17} color={color} strokeWidth={2} />
+            <span>{label}</span>
+          </button>
         ))}
       </div>
 
       {tab === 'ocr' && (
         <div className="card">
-          <div className="section-title">📷 Document Scanner (OCR)</div>
+          <div className="section-title"><Camera size={18} color='#2563EB' /> Document Scanner (OCR)</div>
           <label htmlFor="scanfile" style={{
             display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
             border:'2px dashed var(--border)', borderRadius:'var(--radius)', padding:40,
             cursor:'pointer', background:'var(--bg)', marginBottom:16
           }}>
-            <div style={{fontSize:40,marginBottom:10}}>📄</div>
+            <div style={{fontSize:40,marginBottom:10}}><FileText size={20} /></div>
             <div style={{fontWeight:600,marginBottom:4}}>{scanning ? 'Scanning...' : 'Click to upload Aadhaar / PAN / Certificate'}</div>
             <div style={{fontSize:12,color:'var(--muted)'}}>Supports JPG, PNG, PDF</div>
             <input id="scanfile" type="file" accept="image/*,.pdf" style={{display:'none'}} onChange={handleScan} />
           </label>
 
-          {scanning && <div style={{textAlign:'center',padding:20,color:'var(--navy-mid)',fontWeight:600}}>⏳ Extracting data via OCR...</div>}
+          {scanning && <div style={{textAlign:'center',padding:20,color:'var(--navy-mid)',fontWeight:600}}><Hourglass size={20} /> Extracting data via OCR...</div>}
 
           {scanned && (
             <div>
-              <div className="success-box" style={{marginBottom:14}}>✅ Data extracted with {scanned.confidence}% confidence</div>
+              <div className="success-box flex items-center gap-2" style={{marginBottom:14}}><CheckCircle size={20} color="#16A34A" /> Data extracted with {scanned.confidence}% confidence</div>
               <div className="grid-2">
                 {Object.entries(scanned).filter(([k]) => k!=='confidence').map(([k,v]) => (
                   <div key={k} className="form-group">
@@ -95,7 +109,7 @@ export default function Documents() {
 
       {tab === 'fill' && (
         <div className="card">
-          <div className="section-title">✏️ Auto-Fill Government Forms</div>
+          <div className="section-title"><PenLine size={18}  color= "#16A34A" /> Auto-Fill Government Forms</div>
           <div className="grid-2">
             <div className="form-group">
               <label>Aadhaar Number</label>
@@ -112,13 +126,27 @@ export default function Documents() {
               </select>
             </div>
           </div>
-          <button className="btn btn-saffron" onClick={handleAutoFill} disabled={loading}>
-            {loading ? 'Filling...' : '✨ Auto Fill Form'}
+          <button
+            className="btn btn-saffron"
+            onClick={handleAutoFill}
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <LoaderCircle size={17} className="spin" />
+                Filling...
+              </>
+            ) : (
+              <>
+                <Sparkles size={17} />
+                Auto Fill Form
+              </>
+            )}
           </button>
 
           {filled && (
             <div style={{marginTop:18}}>
-              <div className="success-box" style={{marginBottom:12}}>✅ Form auto-filled successfully!</div>
+              <div className="success-box flex items-center gap-2" style={{marginBottom:12}}><CheckCircle size={20} color="#16A34A" /> Form auto-filled successfully!</div>
               <div className="grid-2">
                 {Object.entries(filled).map(([k,v]) => (
                   <div key={k} className="form-group">
@@ -128,8 +156,8 @@ export default function Documents() {
                 ))}
               </div>
               <div style={{display:'flex',gap:10,marginTop:4}}>
-                <button className="btn btn-primary">🖨️ Print Form</button>
-                <button className="btn btn-green">💾 Save & Submit</button>
+                <button className="btn btn-primary"><Printer size={18} /> Print Form</button>
+                <button className="btn btn-green"><Save size={18} /> Save & Submit</button>
               </div>
             </div>
           )}
@@ -138,7 +166,7 @@ export default function Documents() {
 
       {tab === 'cert' && (
         <div className="card">
-          <div className="section-title">📜 Certificate Generator</div>
+          <div className="section-title"> <ScrollText size={18} color=  "#EA580C" /> Certificate Generator</div>
           <div className="grid-2">
             <div className="form-group">
               <label>Certificate Type</label>
@@ -170,8 +198,22 @@ export default function Documents() {
               <input type="text" maxLength={4} placeholder="XXXX" value={cert.aadhaar_last4} onChange={e=>setCert(c=>({...c,aadhaar_last4:e.target.value}))} />
             </div>
           </div>
-          <button className="btn btn-saffron" onClick={handleGenCert} disabled={loading}>
-            {loading ? 'Generating...' : '📜 Generate Certificate'}
+          <button
+            className="btn btn-saffron"
+            onClick={handleGenCert}
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <LoaderCircle size={17} className="spin" />
+                Generating...
+              </>
+            ) : (
+              <>
+                <ScrollText size={17} />
+                Generate Certificate
+              </>
+            )}
           </button>
 
           {certResult && (
@@ -188,8 +230,8 @@ export default function Documents() {
                 ))}
               </div>
               <div style={{display:'flex',gap:10,marginTop:12}}>
-                <button className="btn btn-primary">🖨️ Print Certificate</button>
-                <button className="btn btn-green">📲 Send to Mobile</button>
+                <button className="btn btn-primary"><Printer size={18} /> Print Certificate</button>
+                <button className="btn btn-green"><Smartphone size={18} /> Send to Mobile</button>
               </div>
             </div>
           )}

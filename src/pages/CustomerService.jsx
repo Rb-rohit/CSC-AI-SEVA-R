@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { chatAPI, trackerAPI } from '../services/api'
+import { ClipboardList, MessageCircle, Smartphone, Zap } from 'lucide-react'
 
 const QUICK_Q = [
   'PM-Kisan status kaise check karein?',
@@ -78,14 +79,14 @@ export default function CustomerService({ lang }) {
       </div>
 
       <div className="tabs">
-        <button className={`tab ${tab==='chat'?'active':''}`} onClick={()=>setTab('chat')}>💬 AI Chatbot</button>
-        <button className={`tab ${tab==='tracker'?'active':''}`} onClick={()=>setTab('tracker')}>📋 App Tracker</button>
+        <button className={`tab ${tab==='chat'?'active':''} flex items-center gap-2 justify-center`} onClick={()=>setTab('chat')}><MessageCircle size={18} /> AI Chatbot</button>
+        <button className={`tab ${tab==='tracker'?'active':''} flex items-center gap-2 justify-center`} onClick={()=>setTab('tracker')}><ClipboardList color='orange' size={18} />  App Tracker</button>
       </div>
 
       {tab === 'chat' && (
         <div className="grid-2" style={{alignItems:'start'}}>
           <div className="card">
-            <div className="section-title">💬 Multilingual Chatbot</div>
+            <div className="section-title"><MessageCircle size={18} /> Multilingual Chatbot</div>
             <div className="chatbox">
               {messages.map((m,i) => (
                 <div key={i} className={`chat-bubble ${m.from==='user'?'user':''}`}>
@@ -109,7 +110,7 @@ export default function CustomerService({ lang }) {
           </div>
 
           <div className="card">
-            <div className="section-title">⚡ Quick Questions</div>
+            <div className="section-title"><Zap color='orange' size={20} /> Quick Questions</div>
             <div style={{display:'flex',flexDirection:'column',gap:8}}>
               {QUICK_Q.map(q => (
                 <button key={q} className="btn btn-outline" style={{textAlign:'left',justifyContent:'flex-start',fontSize:12}}
@@ -119,7 +120,7 @@ export default function CustomerService({ lang }) {
               ))}
             </div>
             <div style={{marginTop:16,padding:12,background:'var(--green-light)',borderRadius:'var(--radius-sm)'}}>
-              <div style={{fontSize:12,fontWeight:700,color:'var(--green)',marginBottom:4}}>📲 SMS Tracking</div>
+              <div className='flex items-center gap-1' style={{fontSize:12,fontWeight:700,color:'var(--green)',marginBottom:4}}><Smartphone  size={18} /> SMS Tracking</div>
               <div style={{fontSize:12,color:'#0d5c0b'}}>Send Application ID to <strong>7827170170</strong> for instant status update</div>
             </div>
           </div>
@@ -128,7 +129,7 @@ export default function CustomerService({ lang }) {
 
       {tab === 'tracker' && (
         <div className="card">
-          <div className="section-title">📋 Application Tracker</div>
+          <div className="section-title"><ClipboardList color='orange' size={20} /> Application Tracker</div>
           <div style={{display:'flex',gap:10,marginBottom:20}}>
             <input type="text" placeholder="Enter Application ID (e.g. CSC/NGP/2024/8847)" value={searchId} onChange={e=>setSearchId(e.target.value)} onKeyDown={e=>e.key==='Enter'&&handleSearch()} />
             <button className="btn btn-primary" onClick={handleSearch} style={{whiteSpace:'nowrap'}}>Check Status</button>
